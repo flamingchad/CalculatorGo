@@ -1,83 +1,42 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func Add() int {
-	fmt.Println("Enter two numbers to add: ")
-	var x, y int
-	n, err := fmt.Scan(&x, &y)
-	if err != nil {
-		fmt.Println(err)
-		return 0
-	}
-	if n != 2 {
-		fmt.Println("Invalid input")
-		return 0
-	}
+func Add(x, y int) int {
 	return x + y
 }
 
-func Subtract() int {
-	fmt.Println("Enter two numbers to subtract: ")
-	var x, y int
-	n, err := fmt.Scan(&x, &y)
-	if err != nil {
-		fmt.Println(err)
-		return 0
-	}
-	if n != 2 {
-		fmt.Println("Invalid input")
-		return 0
-	}
+func Subtract(x, y int) int {
 	return x - y
 }
 
-func Multiply() int {
-	fmt.Println("Enter two numbers to multiply:")
-	var x, y int
-	n, err := fmt.Scan(&x, &y)
-	if err != nil {
-		fmt.Println(err)
-		return 0
-	}
-	if n != 2 {
-		fmt.Println("Wrong input")
-		return 0
-	}
+func Multiply(x, y int) int {
 	return x * y
 }
 
-func Divide() int {
-	fmt.Println("Enter two numbers to divide: ")
-	var x, y int
-	n, err := fmt.Scan(&x, &y)
-	if err != nil {
-		fmt.Println(err)
-		return 0
-	}
-	if n != 2 {
-		fmt.Println("Wrong input")
+func Divide(x, y int) int {
+	if y == 0 {
+		fmt.Println("Error: Division by zero")
 		return 0
 	}
 	return x / y
 }
 
-func Choice(choiceValue int) {
+func Choice(choiceValue, x, y int) int {
 	switch choiceValue {
 	case 1:
-		fmt.Println(Add())
-
+		return Add(x, y)
 	case 2:
-		fmt.Println(Subtract())
-
+		return Subtract(x, y)
 	case 3:
-		fmt.Println(Multiply())
-
+		return Multiply(x, y)
 	case 4:
-		fmt.Println(Divide())
-
+		return Divide(x, y)
 	default:
 		fmt.Println("Invalid choice")
+		return -1
 	}
 }
 
@@ -93,12 +52,30 @@ func main() {
 
 	n, err := fmt.Scan(&choice)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Error reading choice:", err)
 		return
 	}
-	if n > 4 || n < 0 {
-		fmt.Println("Invalid input")
+	if n != 1 || choice < 1 || choice > 4 {
+		fmt.Println("Invalid choice")
 		return
 	}
-	Choice(choice)
+
+	var input1, input2 int
+
+	fmt.Println("Enter the first number: ")
+	_, err = fmt.Scan(&input1) //using _ here cause we want to ignore the count of the scanned items, instead only error.
+	if err != nil {
+		fmt.Println("Error reading first number:", err)
+		return
+	}
+
+	fmt.Println("Enter the second number: ")
+	_, err = fmt.Scan(&input2)
+	if err != nil {
+		fmt.Println("Error reading second number:", err)
+		return
+	}
+
+	result := Choice(choice, input1, input2)
+	fmt.Println("Result:", result)
 }

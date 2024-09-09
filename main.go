@@ -62,6 +62,25 @@ func Divide() int {
 	return x / y
 }
 
+func Choice(choiceValue int) {
+	switch choiceValue {
+	case 1:
+		fmt.Println(Add())
+
+	case 2:
+		fmt.Println(Subtract())
+
+	case 3:
+		fmt.Println(Multiply())
+
+	case 4:
+		fmt.Println(Divide())
+
+	default:
+		fmt.Println("Invalid choice")
+	}
+}
+
 func main() {
 	fmt.Println("------------------>    Calculator    <------------------")
 	fmt.Println("Options: ")
@@ -81,21 +100,5 @@ func main() {
 		fmt.Println("Invalid input")
 		return
 	}
-	switch choice {
-	case 1:
-		fmt.Println(Add())
-
-	case 2:
-		fmt.Println(Subtract())
-
-	case 3:
-		fmt.Println(Multiply())
-
-	case 4:
-		fmt.Println(Divide())
-
-	default:
-		fmt.Println("Invalid choice")
-	}
-
+	Choice(choice)
 }
